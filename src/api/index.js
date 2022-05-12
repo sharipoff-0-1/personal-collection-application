@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://collection-project.herokuapp.com/posts",
+  baseURL: "https://collection-project.herokuapp.com",
 });
 
 API.interceptors.request.use((req) => {
@@ -13,8 +13,6 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
-
-// const url = "https://collection-project.herokuapp.com/posts";
 
 export const fetchPosts = () => API.get("/posts");
 export const createPost = (newPost) => API.post("/posts", newPost);
