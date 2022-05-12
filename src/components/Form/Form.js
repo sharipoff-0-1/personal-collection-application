@@ -8,7 +8,6 @@ import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -19,32 +18,45 @@ const Form = ({ currentId, setCurrentId }) => {
   );
   const dispatch = useDispatch();
   const styles = useStyles();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (currentPost) setPostData(currentPost);
   }, [currentPost]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (currentId) {
-      dispatch(updatePost(currentId, postData));
-      clear();
-    } else {
-      dispatch(createPost(postData));
-      clear();
-    }
-  };
   const clear = () => {
-    setCurrentId(null);
+    setCurrentId(0);
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: "",
       selectedFile: "",
     });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      clear();
+    } else {
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
+      clear();
+    }
+  };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={styles.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to create your own Collections!
+        </Typography>
+      </Paper>
+    );
+  }
 
   return (
     <Paper className={styles.paper}>
@@ -57,16 +69,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? `Editing ${currentPost.title}` : "Create a Collection"}
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        />
         <TextField
           name="title"
           variant="outlined"
