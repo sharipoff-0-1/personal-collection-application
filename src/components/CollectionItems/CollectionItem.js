@@ -51,11 +51,7 @@ const CollectionItem = () => {
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <Typography variant="body1">
-            <strong>Realtime Chat - coming soon!</strong>
-          </Typography>
-          <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
+            <strong>Comments </strong>
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
         </div>
