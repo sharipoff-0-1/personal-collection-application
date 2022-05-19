@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import useStyles from "./styles";
 import { createPost, updatePost } from "../../actions/posts";
@@ -9,14 +10,15 @@ import { createPost, updatePost } from "../../actions/posts";
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
-    message: "",
+    description: "",
     tags: "",
     selectedFile: "",
   });
   const currentPost = useSelector((state) =>
-    currentId ? state.posts.find((post) => post._id === currentId) : null
+    currentId ? state.posts.posts.find((post) => post._id === currentId) : null
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const styles = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -28,7 +30,7 @@ const Form = ({ currentId, setCurrentId }) => {
     setCurrentId(0);
     setPostData({
       title: "",
-      message: "",
+      description: "",
       tags: "",
       selectedFile: "",
     });
@@ -38,7 +40,7 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
       clear();
     } else {
       dispatch(
@@ -78,15 +80,15 @@ const Form = ({ currentId, setCurrentId }) => {
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
         <TextField
-          name="message"
+          name="description"
           variant="outlined"
-          label="Message"
+          label="Description"
           multiline
           rows={4}
           fullWidth
-          value={postData.message}
+          value={postData.description}
           onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
+            setPostData({ ...postData, description: e.target.value })
           }
         />
         <TextField

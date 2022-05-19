@@ -14,10 +14,12 @@ import moment from "moment";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const Likes = () => {
@@ -46,13 +48,17 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
+  const openPost = () => navigate(`/posts/${post._id}`);
+
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} raised elevation={6}>
+      {/* <ButtonBase className={styles.cardAction} > */}
       <CardMedia
         className={styles.media}
         image={post.selectedFile}
         title={post.title}
         component="div"
+        onClick={openPost}
       />
       <div className={styles.overlay}>
         <Typography variant="h6">{post.name}</Typography>
@@ -86,9 +92,10 @@ const Post = ({ post, setCurrentId }) => {
       </Typography>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {post.message}
+          {post.description}
         </Typography>
       </CardContent>
+      {/* </ButtonBase> */}
       <CardActions className={styles.cardActions}>
         <Button
           size="small"

@@ -1,15 +1,14 @@
 import { makeStyles } from "@mui/styles";
-// import { deepPurple } from "@mui/material/colors";
 
 export default makeStyles((theme) => ({
   appBar: {
-    borderRadius: 8,
-    margin: "30px 0",
+    borderRadius: 2,
+    margin: "0 0 20px 0",
     display: "flex",
     flexDirection: "row !important",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "10px 50px",
+    padding: "10px 30px",
   },
   heading: {
     color: "white",
@@ -18,12 +17,12 @@ export default makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "300px",
+    width: "100%",
   },
   profile: {
     display: "flex",
     justifyContent: "space-between",
-    width: "400px",
+    width: "300px",
   },
   userName: {
     display: "flex",
@@ -33,8 +32,4 @@ export default makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
-  // purple: {
-  //   color: theme.palette.getContrastText(deepPurple[500]),
-  //   backgroundColor: deepPurple[500],
-  // },
 }));

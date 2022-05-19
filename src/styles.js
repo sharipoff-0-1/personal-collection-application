@@ -12,6 +12,11 @@ export default makeStyles(() => ({
   heading: {
     color: "rgba(0,183,255, 1)",
   },
+  pagination: {
+    borderRadius: 4,
+    marginTop: "1rem",
+    padding: "10px",
+  },
   image: {
     marginLeft: "15px",
     width: "60px",
