@@ -30,4 +30,16 @@ export default makeStyles(() => ({
     borderRadius: "15px",
     height: "39vh",
   },
+
+  commentsOuterContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+
+  commentsInnerContainer: {
+    width: "40%",
+    height: "200px",
+    overflowY: "auto",
+    marginRight: "30px",
+  },
 }));

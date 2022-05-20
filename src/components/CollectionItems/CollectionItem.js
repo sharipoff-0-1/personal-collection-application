@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 
+import CommentSection from "./commentSection";
 import { getPost } from "../../actions/posts";
 import useStyles from "./styles";
 
@@ -45,14 +46,14 @@ const CollectionItem = () => {
           <Typography gutterBottom variant="body1" component="p">
             {post.message}
           </Typography>
-          <Typography variant="h6">Created by: {post.name}</Typography>
+          <Typography variant="h6">
+            Created by: <strong>{post.name}</strong>
+          </Typography>
           <Typography variant="body1">
             {moment(post.createdAt).fromNow()}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Comments </strong>
-          </Typography>
+          <CommentSection post={post} />
           <Divider style={{ margin: "20px 0" }} />
         </div>
         <div className={styles.imageSection}>

@@ -4,6 +4,8 @@ const API = axios.create({
   baseURL: "https://collection-project.herokuapp.com",
 });
 
+// "http://localhost:5000"
+
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${
@@ -24,6 +26,8 @@ export const fetchPostsBySearch = (searchQuery) =>
   );
 export const createPost = (newPost) => API.post("/posts", newPost);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
+export const comment = (value, id) =>
+  API.post(`/posts/${id}/commentPost`, { value });
 export const updatePost = (id, updatedPost) =>
   API.patch(`/posts/${id}`, updatedPost);
 export const deletePost = (id) => API.delete(`/posts/${id}`);
